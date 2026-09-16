@@ -1,0 +1,59 @@
+{
+  "AHR_DICE": {
+    "Category": "Arkham Horror RPG",
+    "Colorsets": {
+      "Normal": "Investigator Aged Ivory",
+      "Horror": "Horror Eldritch Green"
+    },
+    "Palettes": {
+      "Normal": {
+        "AgedIvory": "Investigator Aged Ivory",
+        "InvestigatorAntiqueBrass": "Investigator Antique Brass",
+        "InvestigatorPorcelainBlue": "Investigator Porcelain Blue",
+        "InvestigatorStandardBlack": "Investigator Standard Black",
+        "ArchetypeHunter": "Archetype Hunter",
+        "ArchetypeAdventurer": "Archetype Adventurer",
+        "ArchetypeRogue": "Archetype Rogue",
+        "ArchetypeBeliever": "Archetype Believer",
+        "ArchetypeSurvivor": "Archetype Survivor",
+        "ArchetypeSeeker": "Archetype Seeker",
+        "ArchetypeMystic": "Archetype Mystic",
+        "ArchetypeGuardian": "Archetype Guardian",
+        "ArchetypeDreamer": "Archetype Dreamer"
+      },
+      "Horror": {
+        "EldritchGreen": "Horror Eldritch Green",
+        "AbyssalBlack": "Horror Abyssal Black",
+        "BruisedViolet": "Horror Bruised Violet",
+        "UnnaturalCrimson": "Horror Unnatural Crimson"
+      }
+    },
+    "Roles": {
+      "Normal": "Arkham Normal Die",
+      "Horror": "Arkham Horror Die"
+    },
+    "SFX": {
+      "Success": "Arkham: Seal the Omen",
+      "Failure": "Arkham: Omen Awakens",
+      "Trauma": "Arkham: Mind Fractures"
+    },
+    "Settings": {
+      "ColorNormalDice": {
+        "Name": "Color normal dice",
+        "Hint": "Apply the selected normal palette to standard Arkham dice. Disabled by default so players keep their personal Dice So Nice appearance unless they opt in."
+      },
+      "ColorHorrorDice": {
+        "Name": "Color horror dice",
+        "Hint": "Apply the Arkham horror-die role to horror dice rolled by the Arkham Horror RPG system."
+      },
+      "NormalDicePalette": {
+        "Name": "Normal dice palette",
+        "Hint": "World-wide Dice So Nice colors for Arkham normal dice. Investigator Standard Black is the default."
+      },
+      "HorrorDicePalette": {
+        "Name": "Horror dice palette",
+        "Hint": "World-wide Dice So Nice colors for Arkham horror dice. Horror Eldritch Green is the default."
+      }
+    }
+  }
+}

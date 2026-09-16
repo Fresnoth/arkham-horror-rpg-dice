@@ -1,0 +1,390 @@
+.ahr-dice-palette-preview {
+  flex: 0 0 2.25rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0.2rem;
+  border: 2px solid var(--ahr-palette-edge);
+  border-radius: 0.3rem;
+  background: var(--ahr-palette-background);
+  box-shadow:
+    inset 0 0 0 1px var(--ahr-palette-outline),
+    0 1px 3px rgb(0 0 0 / 35%);
+}
+
+.ahr-dice-palette-preview__face {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  color: var(--ahr-palette-foreground);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow:
+    -1px -1px 0 var(--ahr-palette-outline),
+    1px -1px 0 var(--ahr-palette-outline),
+    -1px 1px 0 var(--ahr-palette-outline),
+    1px 1px 0 var(--ahr-palette-outline);
+}
+
+.ahr-dice-sfx {
+  --ahr-sfx-color: #58bfff;
+  --ahr-sfx-shadow: rgb(4 39 91 / 88%);
+  position: fixed;
+  z-index: 1100;
+  width: 10rem;
+  height: 10rem;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: ahr-dice-sfx-life 1.8s ease-out forwards;
+  filter: drop-shadow(0 0 0.8rem var(--ahr-sfx-shadow));
+}
+
+.ahr-dice-sfx--failure {
+  --ahr-sfx-color: #ff514b;
+  --ahr-sfx-shadow: rgb(91 3 9 / 95%);
+}
+
+.ahr-dice-sfx--trauma {
+  --ahr-sfx-color: #a7d8bd;
+  --ahr-sfx-shadow: rgb(0 12 10 / 98%);
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  transform: none;
+  overflow: hidden;
+  animation: ahr-dice-trauma-life 2.2s steps(8, end) forwards;
+  filter: none;
+}
+
+.ahr-dice-sfx__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(97deg, transparent 0 4px, rgb(111 180 145 / 7%) 5px, transparent 7px),
+    radial-gradient(circle at var(--ahr-die-x) var(--ahr-die-y), transparent 0 3rem, rgb(4 21 17 / 38%) 12rem, rgb(0 4 3 / 88%) 70%);
+  animation: ahr-dice-trauma-veil 0.18s steps(2, end) infinite;
+}
+
+.ahr-dice-sfx__ring {
+  position: absolute;
+  inset: 13%;
+  border: 0.16rem solid var(--ahr-sfx-color);
+  border-radius: 50%;
+  box-shadow: inset 0 0 1rem var(--ahr-sfx-shadow), 0 0 1rem var(--ahr-sfx-shadow);
+  animation: ahr-dice-sfx-turn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.ahr-dice-sfx__ring::before,
+.ahr-dice-sfx__ring::after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border: 1px solid currentcolor;
+  transform: rotate(45deg);
+}
+
+.ahr-dice-sfx__ring::after {
+  transform: rotate(22.5deg);
+}
+
+.ahr-dice-sfx__ring--inner {
+  inset: 31%;
+  border-style: double;
+  animation-direction: reverse;
+}
+
+.ahr-dice-sfx__mark {
+  position: absolute;
+  inset: 40%;
+  background: var(--ahr-sfx-color);
+  clip-path: polygon(50% 0, 62% 36%, 100% 50%, 62% 64%, 50% 100%, 38% 64%, 0 50%, 38% 36%);
+  box-shadow: 0 0 1rem var(--ahr-sfx-color);
+  animation: ahr-dice-sfx-pulse 0.7s ease-in-out alternate 2;
+}
+
+.ahr-dice-sfx > i {
+  --angle: calc(var(--ray) * 45deg);
+  position: absolute;
+  left: calc(50% - 1px);
+  top: 50%;
+  width: 2px;
+  height: 5rem;
+  background: linear-gradient(to bottom, var(--ahr-sfx-color), transparent 80%);
+  transform-origin: 50% 0;
+  transform: rotate(var(--angle)) translateY(2.2rem);
+  opacity: 0.75;
+}
+
+.ahr-dice-sfx--success .ahr-dice-sfx__ring {
+  border-width: 0.24rem;
+  border-style: double;
+  box-shadow:
+    inset 0 0 0 0.45rem rgb(88 191 255 / 10%),
+    inset 0 0 1.4rem var(--ahr-sfx-shadow),
+    0 0 1.2rem var(--ahr-sfx-shadow);
+  animation-name: ahr-dice-success-seal;
+}
+
+.ahr-dice-sfx--success .ahr-dice-sfx__ring::before {
+  inset: 20%;
+  border: 0.18rem solid var(--ahr-sfx-color);
+  border-radius: 50%;
+  transform: none;
+}
+
+.ahr-dice-sfx--success .ahr-dice-sfx__ring::after {
+  inset: 39% -14%;
+  border-width: 1px 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 35%,
+    rgb(230 247 255 / 75%) 36% 42%,
+    transparent 43% 57%,
+    rgb(230 247 255 / 55%) 58% 64%,
+    transparent 65%
+  );
+  transform: rotate(-18deg);
+}
+
+.ahr-dice-sfx--success .ahr-dice-sfx__ring--inner {
+  inset: 34%;
+  border-style: solid;
+  animation-direction: normal;
+}
+
+.ahr-dice-sfx--success .ahr-dice-sfx__mark {
+  inset: 41%;
+  border: 0.2rem solid var(--ahr-sfx-color);
+  border-radius: 50%;
+  background: rgb(3 24 56 / 88%);
+  clip-path: none;
+  box-shadow: inset 0 0 0.7rem var(--ahr-sfx-color), 0 0 1rem var(--ahr-sfx-color);
+  animation-name: ahr-dice-success-close;
+}
+
+.ahr-dice-sfx--success .ahr-dice-sfx__mark::before {
+  content: "";
+  position: absolute;
+  left: 42%;
+  top: -110%;
+  width: 16%;
+  height: 320%;
+  border-radius: 50%;
+  background: #e6f7ff;
+  box-shadow: 0 0 0.7rem #e6f7ff;
+}
+
+.ahr-dice-sfx--success .ahr-dice-sfx__mark::after {
+  content: "";
+  position: absolute;
+  inset: -95%;
+  border: 1px dotted rgb(230 247 255 / 85%);
+  border-radius: 50%;
+  animation: ahr-dice-success-orbit 0.9s linear infinite;
+}
+
+.ahr-dice-sfx--success > i::after {
+  content: "";
+  position: absolute;
+  left: -0.18rem;
+  top: 58%;
+  width: 0.42rem;
+  height: 0.42rem;
+  border: 1px solid #e6f7ff;
+  border-radius: 50%;
+  background: rgb(3 24 56 / 88%);
+  box-shadow: 0 0 0.5rem var(--ahr-sfx-color);
+}
+
+.ahr-dice-sfx--failure .ahr-dice-sfx__ring {
+  border: 0.3rem solid var(--ahr-sfx-color);
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  box-shadow: inset 0 0 1.2rem var(--ahr-sfx-shadow), 0 0 1.4rem var(--ahr-sfx-shadow);
+  animation: ahr-dice-failure-break 0.8s steps(4, end) both;
+}
+
+.ahr-dice-sfx--failure .ahr-dice-sfx__ring::before,
+.ahr-dice-sfx--failure .ahr-dice-sfx__ring::after {
+  inset: 14%;
+  height: auto;
+  border: 0.16rem dashed rgb(255 133 126 / 90%);
+  border-left-color: transparent;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  transform: rotate(38deg);
+}
+
+.ahr-dice-sfx--failure .ahr-dice-sfx__ring::after {
+  inset: 30%;
+  border-style: solid;
+  border-top-color: transparent;
+  border-left-color: var(--ahr-sfx-color);
+  transform: rotate(-31deg);
+}
+
+.ahr-dice-sfx--failure .ahr-dice-sfx__ring--inner {
+  inset: 27%;
+  border: 0.18rem dashed var(--ahr-sfx-color);
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-radius: 50%;
+  animation-direction: reverse;
+}
+
+.ahr-dice-sfx--failure .ahr-dice-sfx__mark {
+  inset: 24% 43%;
+  border: 0;
+  background: #ff817a;
+  clip-path: polygon(52% 0, 100% 0, 67% 39%, 94% 39%, 28% 100%, 45% 55%, 8% 55%);
+  box-shadow: 0 0 1.2rem var(--ahr-sfx-color);
+  transform: rotate(12deg);
+  animation: ahr-dice-failure-rift 0.28s steps(2, end) infinite alternate;
+}
+
+.ahr-dice-sfx--failure > i {
+  width: 0.16rem;
+  height: 4.8rem;
+  background: linear-gradient(to bottom, #ff817a, var(--ahr-sfx-color) 35%, transparent 72%);
+  transform: rotate(var(--angle)) translateY(2.8rem) skewX(12deg);
+}
+
+.ahr-dice-sfx--trauma .ahr-dice-sfx__ring {
+  inset: auto;
+  left: calc(var(--ahr-die-x) - 9rem);
+  top: calc(var(--ahr-die-y) - 9rem);
+  width: 18rem;
+  height: 18rem;
+  border-width: 0.25rem;
+  border-style: dotted;
+  box-shadow: inset 0 0 3rem #020806, 0 0 3rem var(--ahr-sfx-color);
+  animation: ahr-dice-trauma-ring 0.55s steps(5, end) infinite alternate;
+}
+
+.ahr-dice-sfx--trauma .ahr-dice-sfx__ring--inner {
+  left: calc(var(--ahr-die-x) - 4.5rem);
+  top: calc(var(--ahr-die-y) - 4.5rem);
+  width: 9rem;
+  height: 9rem;
+  border-style: double;
+  animation-direction: alternate-reverse;
+}
+
+.ahr-dice-sfx--trauma .ahr-dice-sfx__mark {
+  inset: auto;
+  left: calc(var(--ahr-die-x) - 2.5rem);
+  top: calc(var(--ahr-die-y) - 2.5rem);
+  width: 5rem;
+  height: 5rem;
+  background: #07100d;
+  border: 0.3rem solid var(--ahr-sfx-color);
+  border-radius: 52% 48% 50% 50%;
+  clip-path: none;
+  box-shadow: inset 0 0 1.5rem #000000, 0 0 2.5rem var(--ahr-sfx-color);
+  animation: ahr-dice-trauma-gaze 0.22s steps(2, end) infinite alternate;
+}
+
+.ahr-dice-sfx--trauma .ahr-dice-sfx__mark::after {
+  content: "";
+  position: absolute;
+  inset: 25% 42%;
+  border-radius: 50%;
+  background: #d6efe0;
+  box-shadow: 0 0 1rem #d6efe0;
+}
+
+.ahr-dice-sfx--trauma > i {
+  --angle: calc(var(--ray) * 30deg);
+  left: var(--ahr-die-x);
+  top: var(--ahr-die-y);
+  width: 0.22rem;
+  height: min(42vw, 34rem);
+  border-radius: 50%;
+  background: linear-gradient(to bottom, var(--ahr-sfx-color), rgb(5 28 22 / 75%) 35%, transparent 86%);
+  transform: rotate(var(--angle)) translateY(2rem) skewX(24deg);
+  opacity: 0.72;
+  animation: ahr-dice-trauma-tendril 0.5s steps(4, end) infinite alternate;
+}
+
+@keyframes ahr-dice-sfx-life {
+  0% { opacity: 0; scale: 0.3; }
+  18% { opacity: 1; scale: 1.15; }
+  65% { opacity: 0.85; scale: 0.95; }
+  100% { opacity: 0; scale: 1.45; }
+}
+
+@keyframes ahr-dice-sfx-turn {
+  from { transform: rotate(-35deg) scale(0.35); }
+  to { transform: rotate(145deg) scale(1); }
+}
+
+@keyframes ahr-dice-sfx-pulse {
+  from { opacity: 0.4; scale: 0.7; }
+  to { opacity: 1; scale: 1.2; }
+}
+
+@keyframes ahr-dice-success-seal {
+  from { transform: rotate(-90deg) scale(1.4); opacity: 0; }
+  to { transform: rotate(90deg) scale(0.82); opacity: 1; }
+}
+
+@keyframes ahr-dice-success-close {
+  from { transform: scale(2.2); opacity: 0; }
+  to { transform: scale(0.82); opacity: 1; }
+}
+
+@keyframes ahr-dice-success-orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ahr-dice-failure-break {
+  0% { transform: rotate(-8deg) scale(0.45); opacity: 0; }
+  35% { transform: rotate(7deg) scale(1.25); opacity: 1; }
+  55% { transform: rotate(-4deg) translate(0.35rem, -0.2rem); }
+  100% { transform: rotate(3deg) scale(1); opacity: 0.9; }
+}
+
+@keyframes ahr-dice-failure-rift {
+  from { transform: rotate(8deg) scaleX(0.72); opacity: 0.65; }
+  to { transform: rotate(16deg) scaleX(1.18); opacity: 1; }
+}
+
+@keyframes ahr-dice-trauma-life {
+  0% { opacity: 0; }
+  8% { opacity: 1; }
+  15% { opacity: 0.35; }
+  24%, 72% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes ahr-dice-trauma-veil {
+  from { transform: translateX(-3px); filter: contrast(1.1); }
+  to { transform: translateX(3px); filter: contrast(1.8); }
+}
+
+@keyframes ahr-dice-trauma-ring {
+  from { transform: rotate(-12deg) scale(0.88); }
+  to { transform: rotate(17deg) scale(1.08); }
+}
+
+@keyframes ahr-dice-trauma-gaze {
+  from { transform: rotate(-7deg) scaleX(0.72); }
+  to { transform: rotate(7deg) scaleX(1.08); }
+}
+
+@keyframes ahr-dice-trauma-tendril {
+  from { scale: 0.75 0.85; opacity: 0.45; }
+  to { scale: 1.18 1; opacity: 0.85; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ahr-dice-sfx,
+  .ahr-dice-sfx * {
+    animation-duration: 0.2s !important;
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "arkham-horror-rpg-dice",
+  "title": "Arkham Horror RPG Dice",
+  "description": "Dice So Nice roles and occult result effects for the Arkham Horror RPG system.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "Fresnoth"
+    }
+  ],
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/arkham-dice.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "arkham-horror-rpg-fvtt",
+        "type": "system",
+        "compatibility": {
+          "minimum": "14.1.0"
+        }
+      }
+    ],
+    "requires": [
+      {
+        "id": "dice-so-nice",
+        "type": "module",
+        "compatibility": {
+          "minimum": "6.3.0"
+        }
+      }
+    ]
+  }
+}

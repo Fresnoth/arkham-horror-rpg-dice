@@ -8,3 +8,4 @@
 - Document effect setup, GM SFX visibility, and pushing SFX configuration to players.
 - Add a consistently framed image gallery for every included palette.
 - Add an animated module preview and optimize palette previews as WebP images.
+- Reorganize the README around features first and move implementation notes into separate technical documentation.

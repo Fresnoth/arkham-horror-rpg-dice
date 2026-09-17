@@ -2,6 +2,10 @@
 
 Arkham Horror RPG Dice connects the Arkham Horror RPG system to Dice So Nice. It identifies normal and horror dice during system rolls, gives each type its own configurable appearance, and adds three result-driven visual effects.
 
+<p align="center">
+	<img src="docs/gifs/arkham-horror-rpg-dice-v010.gif" alt="Arkham Horror RPG dice and special effects in Foundry VTT" width="900">
+</p>
+
 The module changes only the presentation of a roll. It does not alter dice results, chat messages, actors, or game rules.
 
 ## Requirements
@@ -45,10 +49,10 @@ The module also registers both roles in Dice So Nice's **Dice Roles** settings f
 
 <table>
 	<tr>
-		<td align="center" width="25%"><img src="docs/images/investigator-aged-ivory.png" alt="Investigator Aged Ivory d6" width="180"><br><strong>Aged Ivory</strong></td>
-		<td align="center" width="25%"><img src="docs/images/investigator-antique-brass.png" alt="Investigator Antique Brass d6" width="180"><br><strong>Antique Brass</strong></td>
-		<td align="center" width="25%"><img src="docs/images/investigator-porcelain-blue.png" alt="Investigator Porcelain Blue d6" width="180"><br><strong>Porcelain Blue</strong></td>
-		<td align="center" width="25%"><img src="docs/images/investigator-standard-black.png" alt="Investigator Standard Black d6" width="180"><br><strong>Standard Black</strong></td>
+		<td align="center" width="25%"><img src="docs/images/investigator-aged-ivory.webp" alt="Investigator Aged Ivory d6" width="180"><br><strong>Aged Ivory</strong></td>
+		<td align="center" width="25%"><img src="docs/images/investigator-antique-brass.webp" alt="Investigator Antique Brass d6" width="180"><br><strong>Antique Brass</strong></td>
+		<td align="center" width="25%"><img src="docs/images/investigator-porcelain-blue.webp" alt="Investigator Porcelain Blue d6" width="180"><br><strong>Porcelain Blue</strong></td>
+		<td align="center" width="25%"><img src="docs/images/investigator-standard-black.webp" alt="Investigator Standard Black d6" width="180"><br><strong>Standard Black</strong></td>
 	</tr>
 </table>
 
@@ -56,19 +60,19 @@ The module also registers both roles in Dice So Nice's **Dice Roles** settings f
 
 <table>
 	<tr>
-		<td align="center" width="33%"><img src="docs/images/archetype-hunter.png" alt="Archetype Hunter d6" width="180"><br><strong>Hunter</strong></td>
-		<td align="center" width="33%"><img src="docs/images/archetype-adventurer.png" alt="Archetype Adventurer d6" width="180"><br><strong>Adventurer</strong></td>
-		<td align="center" width="33%"><img src="docs/images/archetype-rogue.png" alt="Archetype Rogue d6" width="180"><br><strong>Rogue</strong></td>
+		<td align="center" width="25%"><img src="docs/images/archetype-adventurer.webp" alt="Archetype Adventurer d6" width="180"><br><strong>Adventurer</strong></td>
+		<td align="center" width="25%"><img src="docs/images/archetype-believer.webp" alt="Archetype Believer d6" width="180"><br><strong>Believer</strong></td>
+		<td align="center" width="25%"><img src="docs/images/archetype-dreamer.webp" alt="Archetype Dreamer d6" width="180"><br><strong>Dreamer</strong></td>
+		<td align="center" width="25%"><img src="docs/images/archetype-guardian.webp" alt="Archetype Guardian d6" width="180"><br><strong>Guardian</strong></td>
 	</tr>
 	<tr>
-		<td align="center"><img src="docs/images/archetype-believer.png" alt="Archetype Believer d6" width="180"><br><strong>Believer</strong></td>
-		<td align="center"><img src="docs/images/archetype-survivor.png" alt="Archetype Survivor d6" width="180"><br><strong>Survivor</strong></td>
-		<td align="center"><img src="docs/images/archetype-seeker.png" alt="Archetype Seeker d6" width="180"><br><strong>Seeker</strong></td>
+		<td align="center"><img src="docs/images/archetype-hunter.webp" alt="Archetype Hunter d6" width="180"><br><strong>Hunter</strong></td>
+		<td align="center"><img src="docs/images/archetype-mystic.webp" alt="Archetype Mystic d6" width="180"><br><strong>Mystic</strong></td>
+		<td align="center"><img src="docs/images/archetype-rogue.webp" alt="Archetype Rogue d6" width="180"><br><strong>Rogue</strong></td>
+		<td align="center"><img src="docs/images/archetype-seeker.webp" alt="Archetype Seeker d6" width="180"><br><strong>Seeker</strong></td>
 	</tr>
 	<tr>
-		<td align="center"><img src="docs/images/archetype-mystic.png" alt="Archetype Mystic d6" width="180"><br><strong>Mystic</strong></td>
-		<td align="center"><img src="docs/images/archetype-guardian.png" alt="Archetype Guardian d6" width="180"><br><strong>Guardian</strong></td>
-		<td align="center"><img src="docs/images/archetype-dreamer.png" alt="Archetype Dreamer d6" width="180"><br><strong>Dreamer</strong></td>
+		<td align="center" colspan="4"><img src="docs/images/archetype-survivor.webp" alt="Archetype Survivor d6" width="180"><br><strong>Survivor</strong></td>
 	</tr>
 </table>
 
@@ -76,10 +80,10 @@ The module also registers both roles in Dice So Nice's **Dice Roles** settings f
 
 <table>
 	<tr>
-		<td align="center" width="25%"><img src="docs/images/horror-eldritch-green.png" alt="Horror Eldritch Green d6" width="180"><br><strong>Eldritch Green</strong></td>
-		<td align="center" width="25%"><img src="docs/images/horror-abyssal-black.png" alt="Horror Abyssal Black d6" width="180"><br><strong>Abyssal Black</strong></td>
-		<td align="center" width="25%"><img src="docs/images/horror-bruised-violet.png" alt="Horror Bruised Violet d6" width="180"><br><strong>Bruised Violet</strong></td>
-		<td align="center" width="25%"><img src="docs/images/horror-unnatural-crimson.png" alt="Horror Unnatural Crimson d6" width="180"><br><strong>Unnatural Crimson</strong></td>
+		<td align="center" width="25%"><img src="docs/images/horror-eldritch-green.webp" alt="Horror Eldritch Green d6" width="180"><br><strong>Eldritch Green</strong></td>
+		<td align="center" width="25%"><img src="docs/images/horror-abyssal-black.webp" alt="Horror Abyssal Black d6" width="180"><br><strong>Abyssal Black</strong></td>
+		<td align="center" width="25%"><img src="docs/images/horror-bruised-violet.webp" alt="Horror Bruised Violet d6" width="180"><br><strong>Bruised Violet</strong></td>
+		<td align="center" width="25%"><img src="docs/images/horror-unnatural-crimson.webp" alt="Horror Unnatural Crimson d6" width="180"><br><strong>Unnatural Crimson</strong></td>
 	</tr>
 </table>
 

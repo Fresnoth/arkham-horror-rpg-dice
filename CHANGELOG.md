@@ -7,3 +7,4 @@
 - Add success, failure, and psychological trauma Dice So Nice effects.
 - Document effect setup, GM SFX visibility, and pushing SFX configuration to players.
 - Add a consistently framed image gallery for every included palette.
+- Add an animated module preview and optimize palette previews as WebP images.

@@ -1,0 +1,61 @@
+name: Build Foundry Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to package, such as v0.1.0
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine release metadata
+        id: release
+        shell: bash
+        run: |
+          TAG="${{ github.event.release.tag_name || inputs.tag }}"
+          VERSION="${TAG#v}"
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Release tag must use vX.Y.Z or X.Y.Z format." >&2
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Check out release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.release.outputs.tag }}
+
+      - name: Prepare release manifest
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+          TAG: ${{ steps.release.outputs.tag }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          jq \
+            --arg version "$VERSION" \
+            --arg url "https://github.com/$REPOSITORY" \
+            --arg manifest "https://github.com/$REPOSITORY/releases/latest/download/module.json" \
+            --arg download "https://github.com/$REPOSITORY/releases/download/$TAG/module.zip" \
+            '.version = $version | .url = $url | .manifest = $manifest | .download = $download' \
+            module.json > module.release.json
+          mv module.release.json module.json
+
+      - name: Create module archive
+        run: zip --recurse-paths module.zip module.json README.md CHANGELOG.md lang scripts styles
+
+      - name: Attach Foundry files to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.release.outputs.tag }}
+        run: gh release upload "$TAG" module.json module.zip --clobber

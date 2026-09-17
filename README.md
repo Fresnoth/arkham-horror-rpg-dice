@@ -2,6 +2,18 @@
 
 A Foundry VTT 14 extension for Dice So Nice 6.3 and the Arkham Horror RPG system.
 
+## Installation
+
+In Foundry's **Add-on Modules** setup screen, choose **Install Module**, paste this manifest URL, and select **Install**:
+
+```text
+https://github.com/Fresnoth/arkham-horror-rpg-dice/releases/latest/download/module.json
+```
+
+Enable **Arkham Horror RPG Dice** in the world after installation. Dice So Nice 6.3 or newer and the Arkham Horror RPG system are required.
+
+For a manual server installation, download `module.zip` from the latest GitHub release and extract it to `Data/modules/arkham-horror-rpg-dice`. The resulting manifest path must be `Data/modules/arkham-horror-rpg-dice/module.json`.
+
 ## Features
 
 - Distinguishes the system's normal and horror d6 pools during 3D rolls.

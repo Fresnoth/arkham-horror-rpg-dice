@@ -3,7 +3,7 @@
 Store repository-owned README screenshots in this directory. Prefer WebP or optimized PNG files and use descriptive lowercase names, for example:
 
 - `special-effects-setup.webp`
-- `global-sfx-option.webp`
+- `show-other-players-sfx.webp`
 - `push-config-to-players.webp`
 
 Reference images from the repository README with a relative path:

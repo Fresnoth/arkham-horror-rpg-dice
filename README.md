@@ -63,23 +63,7 @@ For trigger syntax and Dice So Nice's full SFX behavior, see the official [Dice 
 
 ## Make effects available to players
 
-Dice So Nice provides two different ways to distribute SFX configuration. Choose one method to avoid duplicate matching rules.
-
-### Option 1: GM-managed global effects
-
-Use this when the GM should keep one central configuration:
-
-1. Configure the three rules while logged in as a GM.
-2. Open the gear options for each rule.
-3. Enable **(GM Only) Enable this SFX for all players**.
-4. Select **OK**, then save the main **3D Dice Settings** window.
-5. Have each player enable **Show other players' special effects** on their Special Effects tab.
-
-The global option does not copy the rule into each player's settings. Dice So Nice adds the GM's marked rule when it prepares rolls, while each viewer retains control over whether effects belonging to other users appear on their screen.
-
-### Option 2: Push the configuration to players
-
-Use this when every player should receive their own copy of the GM's rules:
+To give every player their own copy of the configured rules, push the GM's SFX configuration:
 
 1. Configure and save the three rules as the GM.
 2. Open **3D Dice Settings > Profiles & Data**.
@@ -89,7 +73,7 @@ Use this when every player should receive their own copy of the GM's rules:
 
 This writes the GM's complete SFX list to every non-GM player, including disconnected players, and overwrites their previous SFX list. Dice So Nice documents this tool in its official [Profiles & Data: GM Tools guide](https://riccisi.gitlab.io/foundryvtt-dice-so-nice/guide/save-files/#gm-tools).
 
-Do not also mark the copied rules as global. A player can otherwise receive both their copied rule and the GM's global rule, causing the same effect to trigger twice.
+The per-effect **(GM Only) Enable this SFX for all players** option is not a configuration-distribution tool. It makes the GM's own matching SFX visible to other players; it does not enable or copy that rule into every player's configuration. Do not mark pushed rules as global, because players can otherwise see both their copied rule and the GM's matching effect.
 
 ## Troubleshooting
 

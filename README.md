@@ -1,6 +1,14 @@
 # Arkham Horror RPG Dice
 
-A Foundry VTT 14 extension for Dice So Nice 6.3 and the Arkham Horror RPG system.
+Arkham Horror RPG Dice connects the Arkham Horror RPG system to Dice So Nice. It identifies normal and horror dice during system rolls, gives each type its own configurable appearance, and adds three result-driven visual effects.
+
+The module changes only the presentation of a roll. It does not alter dice results, chat messages, actors, or game rules.
+
+## Requirements
+
+- Foundry Virtual Tabletop 14
+- Arkham Horror RPG system 14.1.0 or newer
+- Dice So Nice 6.3.0 or newer
 
 ## Installation
 
@@ -10,11 +18,11 @@ In Foundry's **Add-on Modules** setup screen, choose **Install Module**, paste t
 https://github.com/Fresnoth/arkham-horror-rpg-dice/releases/latest/download/module.json
 ```
 
-Enable **Arkham Horror RPG Dice** in the world after installation. Dice So Nice 6.3 or newer and the Arkham Horror RPG system are required.
+Enable **Arkham Horror RPG Dice** and **Dice So Nice** in the world after installation.
 
 For a manual server installation, download `module.zip` from the latest GitHub release and extract it to `Data/modules/arkham-horror-rpg-dice`. The resulting manifest path must be `Data/modules/arkham-horror-rpg-dice/module.json`.
 
-## Features
+## What the module adds
 
 - Distinguishes the system's normal and horror d6 pools during 3D rolls.
 - Registers customizable `Arkham Normal Die` and `Arkham Horror Die` roles in Dice So Nice.
@@ -22,19 +30,74 @@ For a manual server installation, download `module.zip` from the latest GitHub r
 - Adds success, failure, and horror-die psychological trauma special-effect modes.
 - Uses CSS-generated occult effects, so there are no external art or audio assets to load.
 
-## Enable result effects
+## Configure dice appearance
 
-Dice So Nice controls when custom effects play. Open **Configure Settings > Dice So Nice > Special Effects**, then add:
+Open **Configure Settings > Module Settings > Arkham Horror RPG Dice** as the GM.
 
-| Formula | Special effect |
-| --- | --- |
-| `d6 == 6` | `Arkham: Seal the Omen` |
-| `d6 == 1` | `Arkham: Omen Awakens` |
-| `d6[arkham-horror] == 1` | `Arkham: Mind Fractures` |
+- **Color normal dice** applies the selected normal palette to Arkham normal dice. It is disabled by default so players retain their personal Dice So Nice appearance.
+- **Normal dice palette** selects the world-wide normal-die appearance used when normal coloring is enabled.
+- **Color horror dice** applies the horror-die role and is enabled by default.
+- **Horror dice palette** selects the world-wide horror-die appearance.
+
+The module also registers both roles in Dice So Nice's **Dice Roles** settings for deeper customization. See the official [Dice So Nice Dice Roles documentation](https://riccisi.gitlab.io/foundryvtt-dice-so-nice/guide/preferences/#dice-roles).
+
+## Configure special effects
+
+Dice So Nice controls which results trigger each effect. Open **3D Dice Settings > Special Effects** and add these three rules:
+
+| Trigger | Mode | Special effect |
+| --- | --- | --- |
+| `d6 == 6` | Basic or Advanced | `Arkham: Seal the Omen` |
+| `d6 == 1` | Basic or Advanced | `Arkham: Omen Awakens` |
+| `d6[arkham-horror] == 1` | Advanced | `Arkham: Mind Fractures` |
+
+For the first two rules, choose `d6` and result `6` or `1` in Basic mode. For the horror-specific rule, add a row, use the code/list toggle to switch it to Advanced mode, and enter `d6[arkham-horror] == 1`.
+
+Select the matching Arkham effect in each row and save the main **3D Dice Settings** window. Clicking **OK** in a row's gear dialog alone does not save the overall configuration.
 
 All three rules can be enabled together. A normal 1 plays `Omen Awakens`; a horror 1 matches both failure rules and layers the much stronger `Mind Fractures` effect over it. The role-aware formula is available because this module tags the dice before Dice So Nice builds its animation notation.
 
 `Seal the Omen` is an intricate spectral-blue ward that contracts shut. `Omen Awakens` is a collapsing crimson circle split by a jagged central rupture. `Mind Fractures` retains the full-screen eldritch eye treatment.
+
+For trigger syntax and Dice So Nice's full SFX behavior, see the official [Dice So Nice Special Effects guide](https://riccisi.gitlab.io/foundryvtt-dice-so-nice/guide/special-effects/).
+
+## Make effects available to players
+
+Dice So Nice provides two different ways to distribute SFX configuration. Choose one method to avoid duplicate matching rules.
+
+### Option 1: GM-managed global effects
+
+Use this when the GM should keep one central configuration:
+
+1. Configure the three rules while logged in as a GM.
+2. Open the gear options for each rule.
+3. Enable **(GM Only) Enable this SFX for all players**.
+4. Select **OK**, then save the main **3D Dice Settings** window.
+5. Have each player enable **Show other players' special effects** on their Special Effects tab.
+
+The global option does not copy the rule into each player's settings. Dice So Nice adds the GM's marked rule when it prepares rolls, while each viewer retains control over whether effects belonging to other users appear on their screen.
+
+### Option 2: Push the configuration to players
+
+Use this when every player should receive their own copy of the GM's rules:
+
+1. Configure and save the three rules as the GM.
+2. Open **3D Dice Settings > Profiles & Data**.
+3. Select **Push my config to players**.
+4. Select **Special effects**. Leave the other categories unchecked unless they should also be replaced.
+5. Confirm **Push**.
+
+This writes the GM's complete SFX list to every non-GM player, including disconnected players, and overwrites their previous SFX list. Dice So Nice documents this tool in its official [Profiles & Data: GM Tools guide](https://riccisi.gitlab.io/foundryvtt-dice-so-nice/guide/save-files/#gm-tools).
+
+Do not also mark the copied rules as global. A player can otherwise receive both their copied rule and the GM's global rule, causing the same effect to trigger twice.
+
+## Troubleshooting
+
+- **An effect appears only for the GM:** Enable **Show other players' special effects** for the viewing player, or use the push method.
+- **An effect plays twice:** Remove the copied player rule or disable the GM rule's global option.
+- **Mind Fractures never plays:** Confirm the row is in Advanced mode and uses exactly `d6[arkham-horror] == 1`.
+- **The Arkham effects are missing from the selector:** Confirm both required modules are enabled, then reload the world.
+- **Changes do not persist:** Save the main **3D Dice Settings** window after closing any row options dialog.
 
 ## How custom animations load
 
@@ -42,14 +105,10 @@ Dice So Nice exports its `DiceSFX` base class from `/modules/dice-so-nice/api.js
 
 The animation itself can use DSN's `box` and `dicemesh` references. This module projects the die's 3D position through the DSN camera, places a DOM effect at the resulting screen position, and lets CSS animate and remove it.
 
-## Customize the dice
-
-The GM can choose the world-wide normal and horror palettes under **Configure Settings > Module Settings > Arkham Horror RPG Dice**. Normal coloring is disabled by default, so each player keeps their personal Dice So Nice appearance unless they opt in; its selected palette defaults to Investigator Standard Black. The four Investigator palettes are Aged Ivory wood, Standard Black resin, Antique Brass metal, and Porcelain Blue pristine. All nine Archetype palettes use frosted material. All four Horror palettes use resin; Horror Eldritch Green uses brighter spectral-green resin with dark green outlines and edges so it remains translucent but clearly differs from Standard Black. Horror coloring remains enabled and defaults to Horror Eldritch Green.
-
-The selected palettes override saved DSN role colors for Arkham rolls while leaving every player's ordinary non-Arkham d6 appearance unchanged.
-
-For deeper customization, the two Arkham roles also remain available in Dice So Nice's **Dice Roles** settings.
-
 ## Integration notes
 
 The Arkham system currently sends horror and normal pools to Dice So Nice as separate plain `Nd6` rolls without metadata. This module wraps the system's two workflow `execute` methods to provide short-lived roll context, then uses the documented `diceSoNiceRollStart` hook and `dsnRole` option to label the displayed copy of each roll. It does not alter results, chat data, or actor data.
+
+## Documentation images
+
+Repository-owned screenshots used by this README belong in [`docs/images`](docs/images/README.md). Use relative links such as `docs/images/special-effects-setup.webp` so images render both on GitHub and in local Markdown previews.

@@ -1,6 +1,6 @@
 # Arkham Horror RPG Dice
 
-Arkham Horror RPG Dice connects the Arkham Horror RPG system to Dice So Nice. It identifies normal and horror dice during system rolls, gives each type its own configurable appearance, and adds three result-driven visual effects.
+Arkham Horror RPG Dice enhances Dice So Nice for the Arkham Horror RPG system. It gives normal and horror dice distinct, configurable appearances and adds dramatic visual effects for successes, failures, and psychological trauma.
 
 <p align="center">
 	<img src="docs/gifs/arkham-horror-rpg-dice-v010.gif" alt="Arkham Horror RPG dice and special effects in Foundry VTT" width="900">
@@ -24,10 +24,10 @@ Choose from 17 palettes organized into Investigator, Archetype, and Horror colle
 
 <table>
 	<tr>
+		<td align="center" width="25%"><img src="docs/images/investigator-standard-black.webp" alt="Investigator Standard Black d6" width="180"><br><strong>Standard Black</strong><br><em>Default</em></td>
 		<td align="center" width="25%"><img src="docs/images/investigator-aged-ivory.webp" alt="Investigator Aged Ivory d6" width="180"><br><strong>Aged Ivory</strong></td>
 		<td align="center" width="25%"><img src="docs/images/investigator-antique-brass.webp" alt="Investigator Antique Brass d6" width="180"><br><strong>Antique Brass</strong></td>
 		<td align="center" width="25%"><img src="docs/images/investigator-porcelain-blue.webp" alt="Investigator Porcelain Blue d6" width="180"><br><strong>Porcelain Blue</strong></td>
-		<td align="center" width="25%"><img src="docs/images/investigator-standard-black.webp" alt="Investigator Standard Black d6" width="180"><br><strong>Standard Black</strong></td>
 	</tr>
 </table>
 
@@ -35,19 +35,21 @@ Choose from 17 palettes organized into Investigator, Archetype, and Horror colle
 
 <table>
 	<tr>
-		<td align="center" width="25%"><img src="docs/images/archetype-adventurer.webp" alt="Archetype Adventurer d6" width="180"><br><strong>Adventurer</strong></td>
-		<td align="center" width="25%"><img src="docs/images/archetype-believer.webp" alt="Archetype Believer d6" width="180"><br><strong>Believer</strong></td>
-		<td align="center" width="25%"><img src="docs/images/archetype-dreamer.webp" alt="Archetype Dreamer d6" width="180"><br><strong>Dreamer</strong></td>
-		<td align="center" width="25%"><img src="docs/images/archetype-guardian.webp" alt="Archetype Guardian d6" width="180"><br><strong>Guardian</strong></td>
+		<td align="center" width="25%" colspan="2"><img src="docs/images/archetype-adventurer.webp" alt="Archetype Adventurer d6" width="180"><br><strong>Adventurer</strong></td>
+		<td align="center" width="25%" colspan="2"><img src="docs/images/archetype-believer.webp" alt="Archetype Believer d6" width="180"><br><strong>Believer</strong></td>
+		<td align="center" width="25%" colspan="2"><img src="docs/images/archetype-dreamer.webp" alt="Archetype Dreamer d6" width="180"><br><strong>Dreamer</strong></td>
+		<td align="center" width="25%" colspan="2"><img src="docs/images/archetype-guardian.webp" alt="Archetype Guardian d6" width="180"><br><strong>Guardian</strong></td>
 	</tr>
 	<tr>
-		<td align="center"><img src="docs/images/archetype-hunter.webp" alt="Archetype Hunter d6" width="180"><br><strong>Hunter</strong></td>
-		<td align="center"><img src="docs/images/archetype-mystic.webp" alt="Archetype Mystic d6" width="180"><br><strong>Mystic</strong></td>
-		<td align="center"><img src="docs/images/archetype-rogue.webp" alt="Archetype Rogue d6" width="180"><br><strong>Rogue</strong></td>
-		<td align="center"><img src="docs/images/archetype-seeker.webp" alt="Archetype Seeker d6" width="180"><br><strong>Seeker</strong></td>
+		<td align="center" width="25%" colspan="2"><img src="docs/images/archetype-hunter.webp" alt="Archetype Hunter d6" width="180"><br><strong>Hunter</strong></td>
+		<td align="center" width="25%" colspan="2"><img src="docs/images/archetype-mystic.webp" alt="Archetype Mystic d6" width="180"><br><strong>Mystic</strong></td>
+		<td align="center" width="25%" colspan="2"><img src="docs/images/archetype-rogue.webp" alt="Archetype Rogue d6" width="180"><br><strong>Rogue</strong></td>
+		<td align="center" width="25%" colspan="2"><img src="docs/images/archetype-seeker.webp" alt="Archetype Seeker d6" width="180"><br><strong>Seeker</strong></td>
 	</tr>
 	<tr>
-		<td align="center" colspan="4"><img src="docs/images/archetype-survivor.webp" alt="Archetype Survivor d6" width="180"><br><strong>Survivor</strong></td>
+		<td colspan="3"></td>
+		<td align="center" width="25%" colspan="2"><img src="docs/images/archetype-survivor.webp" alt="Archetype Survivor d6" width="180"><br><strong>Survivor</strong></td>
+		<td colspan="3"></td>
 	</tr>
 </table>
 
@@ -55,7 +57,7 @@ Choose from 17 palettes organized into Investigator, Archetype, and Horror colle
 
 <table>
 	<tr>
-		<td align="center" width="25%"><img src="docs/images/horror-eldritch-green.webp" alt="Horror Eldritch Green d6" width="180"><br><strong>Eldritch Green</strong></td>
+		<td align="center" width="25%"><img src="docs/images/horror-eldritch-green.webp" alt="Horror Eldritch Green d6" width="180"><br><strong>Eldritch Green</strong><br><em>Default</em></td>
 		<td align="center" width="25%"><img src="docs/images/horror-abyssal-black.webp" alt="Horror Abyssal Black d6" width="180"><br><strong>Abyssal Black</strong></td>
 		<td align="center" width="25%"><img src="docs/images/horror-bruised-violet.webp" alt="Horror Bruised Violet d6" width="180"><br><strong>Bruised Violet</strong></td>
 		<td align="center" width="25%"><img src="docs/images/horror-unnatural-crimson.webp" alt="Horror Unnatural Crimson d6" width="180"><br><strong>Unnatural Crimson</strong></td>

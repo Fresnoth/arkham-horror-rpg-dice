@@ -41,6 +41,48 @@ Open **Configure Settings > Module Settings > Arkham Horror RPG Dice** as the GM
 
 The module also registers both roles in Dice So Nice's **Dice Roles** settings for deeper customization. See the official [Dice So Nice Dice Roles documentation](https://riccisi.gitlab.io/foundryvtt-dice-so-nice/guide/preferences/#dice-roles).
 
+### Investigator palettes
+
+<table>
+	<tr>
+		<td align="center" width="25%"><img src="docs/images/investigator-aged-ivory.png" alt="Investigator Aged Ivory d6" width="180"><br><strong>Aged Ivory</strong></td>
+		<td align="center" width="25%"><img src="docs/images/investigator-antique-brass.png" alt="Investigator Antique Brass d6" width="180"><br><strong>Antique Brass</strong></td>
+		<td align="center" width="25%"><img src="docs/images/investigator-porcelain-blue.png" alt="Investigator Porcelain Blue d6" width="180"><br><strong>Porcelain Blue</strong></td>
+		<td align="center" width="25%"><img src="docs/images/investigator-standard-black.png" alt="Investigator Standard Black d6" width="180"><br><strong>Standard Black</strong></td>
+	</tr>
+</table>
+
+### Archetype palettes
+
+<table>
+	<tr>
+		<td align="center" width="33%"><img src="docs/images/archetype-hunter.png" alt="Archetype Hunter d6" width="180"><br><strong>Hunter</strong></td>
+		<td align="center" width="33%"><img src="docs/images/archetype-adventurer.png" alt="Archetype Adventurer d6" width="180"><br><strong>Adventurer</strong></td>
+		<td align="center" width="33%"><img src="docs/images/archetype-rogue.png" alt="Archetype Rogue d6" width="180"><br><strong>Rogue</strong></td>
+	</tr>
+	<tr>
+		<td align="center"><img src="docs/images/archetype-believer.png" alt="Archetype Believer d6" width="180"><br><strong>Believer</strong></td>
+		<td align="center"><img src="docs/images/archetype-survivor.png" alt="Archetype Survivor d6" width="180"><br><strong>Survivor</strong></td>
+		<td align="center"><img src="docs/images/archetype-seeker.png" alt="Archetype Seeker d6" width="180"><br><strong>Seeker</strong></td>
+	</tr>
+	<tr>
+		<td align="center"><img src="docs/images/archetype-mystic.png" alt="Archetype Mystic d6" width="180"><br><strong>Mystic</strong></td>
+		<td align="center"><img src="docs/images/archetype-guardian.png" alt="Archetype Guardian d6" width="180"><br><strong>Guardian</strong></td>
+		<td align="center"><img src="docs/images/archetype-dreamer.png" alt="Archetype Dreamer d6" width="180"><br><strong>Dreamer</strong></td>
+	</tr>
+</table>
+
+### Horror palettes
+
+<table>
+	<tr>
+		<td align="center" width="25%"><img src="docs/images/horror-eldritch-green.png" alt="Horror Eldritch Green d6" width="180"><br><strong>Eldritch Green</strong></td>
+		<td align="center" width="25%"><img src="docs/images/horror-abyssal-black.png" alt="Horror Abyssal Black d6" width="180"><br><strong>Abyssal Black</strong></td>
+		<td align="center" width="25%"><img src="docs/images/horror-bruised-violet.png" alt="Horror Bruised Violet d6" width="180"><br><strong>Bruised Violet</strong></td>
+		<td align="center" width="25%"><img src="docs/images/horror-unnatural-crimson.png" alt="Horror Unnatural Crimson d6" width="180"><br><strong>Unnatural Crimson</strong></td>
+	</tr>
+</table>
+
 ## Configure special effects
 
 Dice So Nice controls which results trigger each effect. Open **3D Dice Settings > Special Effects** and add these three rules:
@@ -92,7 +134,3 @@ The animation itself can use DSN's `box` and `dicemesh` references. This module 
 ## Integration notes
 
 The Arkham system currently sends horror and normal pools to Dice So Nice as separate plain `Nd6` rolls without metadata. This module wraps the system's two workflow `execute` methods to provide short-lived roll context, then uses the documented `diceSoNiceRollStart` hook and `dsnRole` option to label the displayed copy of each roll. It does not alter results, chat data, or actor data.
-
-## Documentation images
-
-Repository-owned screenshots used by this README belong in [`docs/images`](docs/images/README.md). Use relative links such as `docs/images/special-effects-setup.webp` so images render both on GitHub and in local Markdown previews.

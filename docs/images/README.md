@@ -1,15 +1,15 @@
 # Documentation Images
 
-Store repository-owned README screenshots in this directory. Prefer WebP or optimized PNG files and use descriptive lowercase names, for example:
+Store repository-owned README screenshots in this directory. Palette previews use 512 x 512 PNG files so every die has the same canvas and README display size. Use descriptive lowercase names, for example:
 
-- `special-effects-setup.webp`
-- `show-other-players-sfx.webp`
-- `push-config-to-players.webp`
+- `investigator-aged-ivory.png`
+- `archetype-guardian.png`
+- `horror-eldritch-green.png`
 
 Reference images from the repository README with a relative path:
 
 ```markdown
-![Arkham special-effect rules configured in Dice So Nice](docs/images/special-effects-setup.webp)
+![Horror Eldritch Green d6](docs/images/horror-eldritch-green.png)
 ```
 
 Do not commit screenshots containing server addresses, access keys, player email addresses, or other private world information.

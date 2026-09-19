@@ -1,5 +1,7 @@
 # Arkham Horror RPG Dice
 
+![Downloads](https://img.shields.io/github/downloads/Fresnoth/arkham-horror-rpg-dice/total)
+
 Arkham Horror RPG Dice enhances Dice So Nice for the Arkham Horror RPG system. It gives normal and horror dice distinct, configurable appearances and adds dramatic visual effects for successes, failures, and psychological trauma.
 
 <p align="center">
@@ -104,6 +106,7 @@ Open **Configure Settings > Module Settings > Arkham Horror RPG Dice** as the GM
 - **Normal dice palette** selects the world-wide normal-die appearance used when normal coloring is enabled.
 - **Color horror dice** applies the horror-die role and is enabled by default.
 - **Horror dice palette** selects the world-wide horror-die appearance.
+- **Legacy ghost dice compatibility** respects Foundry's selected chat visibility for the Arkham system's standalone 3D rolls. Leave it on **Automatic** unless troubleshooting; it does not alter chat-message recipients.
 
 The module also registers both roles in Dice So Nice's **Dice Roles** settings for deeper customization. See the official [Dice So Nice Dice Roles documentation](https://riccisi.gitlab.io/foundryvtt-dice-so-nice/guide/preferences/#dice-roles).
 
@@ -142,6 +145,7 @@ The per-effect **(GM Only) Enable this SFX for all players** option is not a con
 - **An effect appears only for the GM:** Enable **Show other players' special effects** for the viewing player, or use the push method.
 - **An effect plays twice:** Remove the copied player rule or disable the GM rule's global option.
 - **Mind Fractures never plays:** Confirm the row is in Advanced mode and uses exactly `d6[arkham-horror] == 1`.
+- **Hidden rolls still show numbered 3D dice:** Confirm **Legacy ghost dice compatibility** is set to **Automatic**, then check Dice So Nice's secret-roll and ghost-dice settings.
 - **The Arkham effects are missing from the selector:** Confirm both required modules are enabled, then reload the world.
 - **Changes do not persist:** Save the main **3D Dice Settings** window after closing any row options dialog.
 

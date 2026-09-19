@@ -46,6 +46,12 @@
         "Name": "Color horror dice",
         "Hint": "Apply the Arkham horror-die role to horror dice rolled by the Arkham Horror RPG system."
       },
+      "GhostDiceCompatibility": {
+        "Name": "Legacy ghost dice compatibility",
+        "Hint": "Respect Foundry chat visibility for Arkham's standalone 3D rolls until the system attaches rolls directly to its chat cards.",
+        "Auto": "Automatic",
+        "Off": "Off"
+      },
       "NormalDicePalette": {
         "Name": "Normal dice palette",
         "Hint": "World-wide Dice So Nice colors for Arkham normal dice. Investigator Standard Black is the default."

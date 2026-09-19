@@ -1,4 +1,5 @@
 import { ArkhamFailureSFX, ArkhamSuccessSFX, ArkhamTraumaSFX } from "./sfx.mjs";
+import { resolveGhostDiceVisibility } from "./visibility.mjs";
 
 const MODULE_ID = "arkham-horror-rpg-dice";
 const SYSTEM_ID = "arkham-horror-rpg-fvtt";
@@ -169,6 +170,19 @@ Hooks.once("init", () => {
     default: true,
   });
 
+  game.settings.register(MODULE_ID, "ghostDiceCompatibility", {
+    name: "AHR_DICE.Settings.GhostDiceCompatibility.Name",
+    hint: "AHR_DICE.Settings.GhostDiceCompatibility.Hint",
+    scope: "world",
+    config: true,
+    type: String,
+    choices: {
+      auto: "AHR_DICE.Settings.GhostDiceCompatibility.Auto",
+      off: "AHR_DICE.Settings.GhostDiceCompatibility.Off",
+    },
+    default: "auto",
+  });
+
   game.settings.register(MODULE_ID, "normalDicePalette", {
     name: "AHR_DICE.Settings.NormalDicePalette.Name",
     hint: "AHR_DICE.Settings.NormalDicePalette.Hint",
@@ -282,9 +296,10 @@ function registerRoles(dice3d) {
 async function patchArkhamWorkflows() {
   try {
     const workflowBase = "/systems/arkham-horror-rpg-fvtt/module/rolls";
-    const [{ SkillRollWorkflow }, { SkillRerollWorkflow }] = await Promise.all([
+    const [{ SkillRollWorkflow }, { SkillRerollWorkflow }, { InjuryTraumaWorkflow }] = await Promise.all([
       import(`${workflowBase}/skill-roll-workflow.mjs`),
       import(`${workflowBase}/skill-reroll-workflow.mjs`),
+      import(`${workflowBase}/injury-trauma-workflow.mjs`),
     ]);
 
     wrapExecute(SkillRollWorkflow, ({ plan }) => {
@@ -300,6 +315,8 @@ async function patchArkhamWorkflows() {
       if (plan.horrorIndices.length > 0) kinds.push(HORROR_ROLE);
       return kinds;
     });
+
+    wrapExecute(InjuryTraumaWorkflow, () => [NORMAL_ROLE]);
   } catch (error) {
     console.error(`${MODULE_ID} | Unable to patch Arkham dice workflows`, error);
   }
@@ -310,7 +327,13 @@ function wrapExecute(WorkflowClass, getRollKinds) {
   if (!original || original[PATCHED]) return;
 
   async function wrappedExecute(args) {
-    const context = { kinds: getRollKinds(args) };
+    const context = {
+      kinds: getRollKinds(args),
+      messageMode: getCurrentMessageMode(),
+    };
+    if (rollContexts.length > 0) {
+      console.warn(`${MODULE_ID} | Overlapping Arkham roll workflows may prevent accurate dice role matching`);
+    }
     rollContexts.push(context);
     try {
       return await original.call(this, args);
@@ -324,25 +347,83 @@ function wrapExecute(WorkflowClass, getRollKinds) {
   WorkflowClass.prototype.execute = wrappedExecute;
 }
 
-function tagArkhamRoll(_messageId, context) {
+function tagArkhamRoll(messageId, context) {
+  if (isGhostReplay(context.roll)) return;
+
   const activeContext = rollContexts.at(-1);
   const role = activeContext?.kinds.shift();
-  if (!role || !shouldColorRole(role)) return;
+  if (!role) return;
 
   try {
     const taggedRoll = Roll.fromJSON(JSON.stringify(context.roll));
-    for (const die of taggedRoll.dice) {
-      die.options.dsnRole = role;
-      die.options.dsnRoleManaged = true;
-      die.options.appearance = {
-        ...die.options.appearance,
-        colorset: getRoleColorset(role),
-      };
+    if (shouldColorRole(role)) {
+      for (const die of taggedRoll.dice) {
+        die.options.dsnRole = role;
+        die.options.dsnRoleManaged = true;
+        die.options.appearance = {
+          ...die.options.appearance,
+          colorset: getRoleColorset(role),
+        };
+      }
     }
     context.dsnRoll = taggedRoll;
+
+    if (messageId || game.settings.get(MODULE_ID, "ghostDiceCompatibility") !== "auto") return;
+
+    const visibility = resolveGhostDiceVisibility({
+      mode: activeContext.messageMode,
+      authorId: context.user?.id ?? game.user.id,
+      users: game.users,
+      hideSecretDice: game.settings.get("dice-so-nice", "hide3dDiceOnSecretRolls"),
+      ghostPolicy: game.settings.get("dice-so-nice", "showGhostDice"),
+    });
+
+    if (!visibility.restricted) return;
+
+    taggedRoll.secret = true;
+    context.users = visibility.realRecipientIds;
+    context.blind = !visibility.realRecipientIds.includes(game.user.id);
+    queueGhostRoll(taggedRoll, context, visibility.ghostRecipientIds);
   } catch (error) {
-    console.warn(`${MODULE_ID} | Unable to tag a Dice So Nice roll`, error);
+    console.warn(`${MODULE_ID} | Unable to prepare a Dice So Nice roll`, error);
   }
+}
+
+function getCurrentMessageMode() {
+  try {
+    return game.settings.get("core", "messageMode");
+  } catch (_error) {
+    return game.settings.get("core", "rollMode");
+  }
+}
+
+function isGhostReplay(roll) {
+  return roll?.dice?.some((die) => die.options?.ahrGhostReplay) ?? false;
+}
+
+function queueGhostRoll(displayRoll, context, recipientIds) {
+  if (recipientIds.length === 0) return;
+
+  const ghostRoll = Roll.fromJSON(JSON.stringify(displayRoll));
+  for (const die of ghostRoll.dice) {
+    die.options.ahrGhostReplay = true;
+  }
+
+  queueMicrotask(() => {
+    const showGhostRoll = game.dice3d?.showForRoll(
+      ghostRoll,
+      context.user,
+      true,
+      recipientIds,
+      !recipientIds.includes(game.user.id),
+      null,
+      null,
+      { ghost: true },
+    );
+    Promise.resolve(showGhostRoll).catch((error) => {
+      console.warn(`${MODULE_ID} | Unable to show ghost dice`, error);
+    });
+  });
 }
 
 function shouldColorRole(role) {

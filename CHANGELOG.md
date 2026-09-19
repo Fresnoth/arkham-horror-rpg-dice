@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0
+
+- Respect Foundry chat visibility for Arkham's standalone Dice So Nice rolls.
+- Show numbered dice only to authorized users and ghost dice according to Dice So Nice's configured policy.
+- Add compatibility coverage for skill rolls, rerolls, and injury or trauma rolls.
+- Add an Automatic or Off world setting for the temporary legacy compatibility path.
+- Add a total GitHub downloads badge to the README.
+
 ## 0.1.0
 
 - Add normal and horror die roles for the Arkham Horror RPG system.
